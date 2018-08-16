@@ -27,12 +27,17 @@ class Controls extends React.Component {
       outline: false,
       outlineColor: '#000000',
       backgroundColorEnabled: true,
+      showPixelGridHelp: false,
     };
   }
 
   componentDidMount() {
     this.setTemplate(this.state.template, true);
   }
+
+  toggleState = name => {
+    this.setState({[name]: !this.state[name]});
+  };
 
   setTemplate = (template, updateStore) => {
     const {pixelData, options} = Generator.templates[template];
@@ -283,7 +288,13 @@ class Controls extends React.Component {
             </Field.Control>
           </Field>
           <Field>
-            <Field.Label />
+            <Field.Label>
+              <span
+                className="icon has-text-info"
+                onClick={() => this.toggleState('showPixelGridHelp')}>
+                <i className="fas fa-question-circle" />
+              </span>
+            </Field.Label>
             <Field.Control>
               <PixelGrid
                 rows={this.state.rows}
@@ -303,6 +314,57 @@ class Controls extends React.Component {
             </Field.Control>
           </Field>
         </Panel>
+        <div
+          className={[
+            'modal',
+            this.state.showPixelGridHelp ? 'is-active' : '',
+          ].join(' ')}>
+          <div
+            className="modal-background"
+            onClick={() => this.toggleState('showPixelGridHelp')}
+          />
+          <div className="modal-content">
+            <article className="message is-primary">
+              <div className="message-header">
+                <p>Editing The Template</p>
+                <button
+                  className="delete"
+                  aria-label="delete"
+                  onClick={() => this.toggleState('showPixelGridHelp')}
+                />
+              </div>
+              <div className="message-body">
+                <p className="content">
+                  Use your mouse to edit the generator template.
+                </p>
+                <p className="content">
+                  Left-clicking the squares will cycle them through 3 different
+                  states:
+                  <ul>
+                    <li>transparent pixel</li>
+                    <li>
+                      foreground pixel (has a 50% of becoming a transparent
+                      pixel)
+                    </li>
+                    <li>
+                      detail pixel (has a 50% chance of turning into foreground
+                      pixel)
+                    </li>
+                  </ul>
+                </p>
+                <p className="content">
+                  Right-clicking the pixel will disable randomness and will make
+                  them persistent.
+                </p>
+                <p className="content">
+                  Middle-clicking on the pixel grid and dragging will allow you
+                  to move the whole pattern. This is pretty handy when you
+                  resize the template and want to re-position it.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
