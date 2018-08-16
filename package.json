@@ -6,19 +6,17 @@
   "scripts": {
     "start": "nodemon --exec babel-node server.js  --ignore src",
     "lint": "eslint .",
-    "deploy": "npm run build && gh-pages -d dist",
-    "test": "npm test"
+    "deploy": "npm run build && gh-pages -d demo",
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./demo/bundle.js",
+    "compile":
+      "NODE_ENV=production webpack --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ArtBIT/pixel-sprite-generator.git"
   },
-  "keywords": [
-    "pixel",
-    "sprite",
-    "generator",
-    "javascript"
-  ],
+  "keywords": ["pixel", "sprite", "generator", "javascript"],
   "author": "Djordje Ungar",
   "license": "MIT",
   "bugs": {

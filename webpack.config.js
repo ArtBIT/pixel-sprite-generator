@@ -1,11 +1,11 @@
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import LiveReloadPlugin from 'webpack-livereload-plugin';
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
 
-export default {
+module.exports = {
   entry: './src/index.jsx',
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/demo',
     filename: 'bundle.js',
   },
   mode: 'production',
@@ -31,4 +31,5 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  devtool: 'inline-source-map',
 };
