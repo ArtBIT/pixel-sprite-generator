@@ -15,10 +15,23 @@ class App extends React.Component {
     this.events = new EventEmitter();
     this.events.on('state', this.handleStateChange);
   }
+
+  componentDidMount() {
+    this.ready = true;
+    if (this.pendingStateChange) {
+      this.handleStateChange(this.pendingStateChange);
+      delete this.pendingStateChange;
+    }
+  }
+
   handleStateChange = state => {
+    if (!this.ready) {
+      this.pendingStateChange = state;
+      return;
+    }
     setSeed(state.seed);
     const pixelData = new PixelData(state.cols, state.rows, state.pixels);
-    const transforms = [
+    const recipes = [
       {name: 'randomize'},
       state.outline && {
         name: 'outline',
@@ -33,7 +46,7 @@ class App extends React.Component {
     ].filter(identity);
     const generator = new Generator({
       pixelData,
-      transforms,
+      recipes,
     });
     const padding = state.padding;
     const pixelSize = state.zoom;
@@ -45,21 +58,26 @@ class App extends React.Component {
     this.canvas.current.height = destHeight;
     const ctx = this.canvas.current.getContext('2d');
 
-    const srcWidth =
-      state.cols * pixelSize * (state.mirrorX ? 2 : 1) + 2 * padding;
-    const srcHeight =
-      state.rows * pixelSize * (state.mirrorY ? 2 : 1) + 2 * padding;
+    const srcWidth = state.cols * pixelSize + 2 * padding;
+    const srcHeight = state.rows * pixelSize + 2 * padding;
     const cols = Math.ceil(destWidth / srcWidth);
     const rows = Math.ceil(destHeight / srcHeight);
     const backgroundColor = state.backgroundColorEnabled
       ? state.backgroundColor
       : 'rgba(0,0,0,0)';
+    const pallette = {
+      0: false,
+      1: state.foregroundColor,
+      2: state.detailsColor,
+      3: state.outline && state.outlineColor,
+    };
     const renderer = new CanvasGridRenderer({
       rows,
       cols,
       padding,
       pixelSize,
       backgroundColor,
+      pallette,
     });
     renderer.render(generator);
     ctx.drawImage(
@@ -74,7 +92,7 @@ class App extends React.Component {
     return (
       <div className="columns is-fullwidth">
         <div className="column is-narrow">
-          <Controls events={this.events} template="robot" />
+          <Controls events={this.events} />
         </div>
         <div className="column">
           <Stage

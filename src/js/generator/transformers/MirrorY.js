@@ -1,16 +1,13 @@
 module.exports = function() {
-  const newWidth = this.width;
-  const newHeight = this.height << 1;
-  const newData = new Array(newWidth * newHeight);
-  for (let j = 0; j < this.height; j++) {
-    let srcRow = j * this.width;
-    let destRow = (newHeight - j - 1) * this.width;
-    for (let i = 0; i < this.width; i++) {
-      newData[srcRow + i] = this.data[srcRow + i];
-      newData[destRow + i] = this.data[srcRow + i];
+  const w = this.width;
+  const h = this.height;
+  const hHalf = h >> 1;
+  for (let j = 0; j < hHalf; j++) {
+    let rowIndex = j * w;
+    for (let i = 0; i < w; i++) {
+      this.data[(h - 1 - j) * w + i] = this.data[rowIndex + i] = this.data[
+        rowIndex + i
+      ];
     }
   }
-  this.data = newData;
-  this.width = newWidth;
-  this.height = newHeight;
 };

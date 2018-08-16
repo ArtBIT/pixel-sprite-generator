@@ -8,12 +8,20 @@
   height: 100%;
 }
 
+.hero-body {
+  padding: 1rem;
+}
+
 .is-disabled {
   opacity: 0.5;
 }
 
 .is-vertical {
   flex-direction: column;
+}
+
+.is-hidden {
+  display: none;
 }
 
 .bg-checkerboard {

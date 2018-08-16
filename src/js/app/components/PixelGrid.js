@@ -1,5 +1,4 @@
 import React from 'react';
-import withBulma from '../decorators/withBulma';
 
 const MOUSE_BUTTON_LEFT = 0;
 const MOUSE_BUTTON_MIDDLE = 1;
@@ -26,7 +25,7 @@ class PixelGrid extends React.Component {
   }
 
   render() {
-    const {cols, rows, pixels, ...restProps} = this.props;
+    const {cols, rows, pixels, mirrorX, mirrorY, ...restProps} = this.props;
     const colors = ['white', 'gray', 'black'];
     return (
       <div
@@ -43,7 +42,9 @@ class PixelGrid extends React.Component {
               {Array(cols)
                 .fill(0)
                 .map((xnone, x) => {
-                  const value = pixels[y * cols + x];
+                  const ix = mirrorX && x >= cols >> 1 ? cols - x - 1 : x;
+                  const iy = mirrorY && y >= rows >> 1 ? rows - y - 1 : y;
+                  const value = pixels[iy * cols + ix];
                   return (
                     <div
                       className={
@@ -74,6 +75,16 @@ class PixelGrid extends React.Component {
     }
   };
   handleMouseMove = e => {
+    const {rows, cols, mirrorX, mirrorY, pixels} = this.props;
+    const rect = this.ref.current.getBoundingClientRect();
+    let x = Math.floor((e.clientX - rect.left) / CELL_SIZE);
+    let y = Math.floor((e.clientY - rect.top) / CELL_SIZE);
+    if (mirrorX) {
+      x = x % (cols >> 1);
+    }
+    if (mirrorY) {
+      y = y % (rows >> 1);
+    }
     if (this.dragging) {
       if (this.mouseDown.button == MOUSE_BUTTON_MIDDLE) {
         // drag
@@ -85,8 +96,6 @@ class PixelGrid extends React.Component {
         const ix = dx >> 3;
         const iy = dy >> 3;
         const pixels = [...this.dragPixels];
-        console.log(dx, dy, ix, iy);
-        const {rows, cols} = this.props;
         for (let y = 0; y < rows; y++)
           for (let x = 0; x < cols; x++)
             pixels[
@@ -95,10 +104,6 @@ class PixelGrid extends React.Component {
         this.onChange({pixels});
       } else if (this.mouseDown.button == MOUSE_BUTTON_LEFT) {
         //draw
-        const {rows, cols, pixels} = this.props;
-        const rect = e.target.getBoundingClientRect();
-        const x = Math.floor((e.clientX - rect.left) / CELL_SIZE);
-        const y = Math.floor((e.clientY - rect.top) / CELL_SIZE);
         const index = y * cols + x;
         if (this.mouseDown.value === undefined) {
           this.mouseDown.value = pixels[index];
@@ -137,12 +142,16 @@ class PixelGrid extends React.Component {
     this.dragPixels = false;
   };
   getPixel = (x, y) => {
-    const {cols, pixels} = this.props;
-    return pixels[y * cols + x];
+    const {cols, rows, mirrorX, mirrorY, pixels} = this.props;
+    const ix = mirrorX && x >= cols >> 1 ? cols - 1 - x : x;
+    const iy = mirrorY && y >= rows >> 1 ? rows - 1 - y : y;
+    return pixels[iy * cols + ix];
   };
   setPixel = (x, y, value) => {
-    const {cols, pixels} = this.props;
-    pixels[y * cols + x] = value;
+    const {cols, rows, mirrorX, mirrorY, pixels} = this.props;
+    const ix = mirrorX && x >= cols >> 1 ? cols - 1 - x : x;
+    const iy = mirrorY && y >= rows >> 1 ? rows - 1 - y : y;
+    pixels[iy * cols + ix] = value;
     this.onChange({pixels: [...pixels]});
   };
   incrementPixel(x, y) {
@@ -154,4 +163,4 @@ class PixelGrid extends React.Component {
   };
 }
 
-export default withBulma('labeled-field')(PixelGrid);
+export default PixelGrid;

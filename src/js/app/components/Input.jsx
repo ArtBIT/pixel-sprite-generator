@@ -1,13 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withBulma from '../decorators/withBulma';
 
-class LabelInput extends React.Component {
+class Input extends React.Component {
   render() {
-    return <input {...this.props} />;
+    const {className, ...restProps} = this.props;
+    return (
+      <input
+        className={[
+          ' text number password '.indexOf(restProps.type) >= 0 ? 'input' : '',
+          className,
+        ].join(' ')}
+        {...restProps}
+      />
+    );
   }
 }
-LabelInput.propTypes = {
+Input.propTypes = {
   // You can declare that a prop is a specific JS primitive. By default, these
   // are all optional.
   name: PropTypes.string.isRequired,
@@ -20,4 +28,4 @@ LabelInput.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default withBulma('labeled-field')(LabelInput);
+export default Input;
