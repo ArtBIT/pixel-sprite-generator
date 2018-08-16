@@ -8,6 +8,7 @@ export default {
     path: __dirname + '/dist',
     filename: 'bundle.js',
   },
+  mode: 'production',
   module: {
     rules: [
       {

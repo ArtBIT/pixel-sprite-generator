@@ -4,8 +4,8 @@ class CanvasGridRenderer {
     options = options || {};
     this.rows = options.rows || 1;
     this.cols = options.cols || 1;
-    this.padding = options.padding || 10;
-    this.backgroundColor = options.backgroundColor || 'gray';
+    this.padding = options.padding || 0;
+    this.backgroundColor = options.backgroundColor;
     this.renderer = new CanvasRenderer(options);
     this.canvas = document.createElement('canvas');
   }

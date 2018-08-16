@@ -14,10 +14,9 @@ class App extends React.Component {
     this.canvas = React.createRef();
     this.events = new EventEmitter();
     this.events.on('state', this.handleStateChange);
-    this.seed = 1337;
   }
   handleStateChange = state => {
-    setSeed(this.seed);
+    setSeed(state.seed);
     const pixelData = new PixelData(state.cols, state.rows, state.pixels);
     const transforms = [
       {name: 'randomize'},
@@ -36,7 +35,7 @@ class App extends React.Component {
       pixelData,
       transforms,
     });
-    const padding = 10;
+    const padding = state.padding;
     const pixelSize = state.zoom;
     const {
       width: destWidth,
@@ -52,11 +51,15 @@ class App extends React.Component {
       state.rows * pixelSize * (state.mirrorY ? 2 : 1) + 2 * padding;
     const cols = Math.ceil(destWidth / srcWidth);
     const rows = Math.ceil(destHeight / srcHeight);
+    const backgroundColor = state.backgroundColorEnabled
+      ? state.backgroundColor
+      : 'rgba(0,0,0,0)';
     const renderer = new CanvasGridRenderer({
       rows,
       cols,
       padding,
       pixelSize,
+      backgroundColor,
     });
     renderer.render(generator);
     ctx.drawImage(
@@ -69,12 +72,16 @@ class App extends React.Component {
   };
   render() {
     return (
-      <div class="columns is-fullwidth">
-        <div class="column is-narrow">
-          <Controls events={this.events} rows={8} cols={6} />
+      <div className="columns is-fullwidth">
+        <div className="column is-narrow">
+          <Controls events={this.events} template="robot" />
         </div>
-        <div class="column">
-          <Stage events={this.events} ref={this.canvas} />
+        <div className="column">
+          <Stage
+            className="bg-checkerboard"
+            events={this.events}
+            ref={this.canvas}
+          />
         </div>
       </div>
     );

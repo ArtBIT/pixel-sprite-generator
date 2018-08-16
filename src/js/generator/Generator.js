@@ -31,11 +31,27 @@ Generator.templates = {
           0, 1, 2, 2,
           1, 1, 0, 0
         ]),
-        transforms: [
-            {name: 'randomize'},
-            {name: 'outline', options: {outlineCharacter: 2, whichCharacters: [1], transparentCharacters: [0]}},
-            {name: 'mirrorx'},
-        ],
+        options: {
+            outline: false,
+            mirrorX: true,
+            mirrorY: false
+        },
+    },
+    "alien alphabet": {
+        pixelData: new PixelData(6, 7, [
+          0, 0, 0, 0, 0, 0,
+          0,-1, 1, 1, 1, 0,
+          0, 0, 0, 0, 1, 0,
+          0, 1, 1, 1,-1, 0,
+          0, 0, 0, 0, 0, 0,
+          0,-1, 1, 1, 1, 0,
+          0, 0, 0, 0, 0, 0,
+        ]),
+        options: {
+            outline: false,
+            mirrorX: false,
+            mirrorY: false
+        },
     },
     "spaceship": {
         pixelData: new PixelData(6, 12, [
@@ -52,11 +68,11 @@ Generator.templates = {
           0, 0, 0, 1, 1, 1,
           0, 0, 0, 0, 0, 0
         ]),
-        transforms: [
-            {name: 'randomize'},
-            {name: 'outline', options: {outlineCharacter: 2, whichCharacters: [1], transparentCharacters: [0]}},
-            {name: 'mirrorx'},
-        ],
+        options: {
+            outline: true,
+            mirrorX: true,
+            mirrorY: false
+        },
     },
     "humanoid": {
         pixelData: new PixelData(8, 13, [
@@ -75,11 +91,11 @@ Generator.templates = {
           0, 0, 0, 1, 2, 1, 0, 0,
           0, 0, 0, 1, 2, 2, 0, 0
         ]),
-        transforms: [
-            {name: 'randomize'},
-            {name: 'outline', options: {outlineCharacter: 2, whichCharacters: [1], transparentCharacters: [0]}},
-            {name: 'mirrorx'},
-        ],
+        options: {
+            outline: true,
+            mirrorX: true,
+            mirrorY: false
+        },
     }
 };
 

@@ -5,7 +5,29 @@
 
 .is-fullview {
   width: 100%;
-  height: 80vh;
+  height: 100%;
+}
+
+.is-disabled {
+  opacity: 0.5;
+}
+
+.is-vertical {
+  flex-direction: column;
+}
+
+.bg-checkerboard {
+  background-color: #ddd;
+  background-image: linear-gradient(45deg, #bbb 25%, transparent 25%),
+    linear-gradient(-45deg, #bbb 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #bbb 75%),
+    linear-gradient(-45deg, transparent 75%, #bbb 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.field-label label {
+  width: 120px;
 }
 
 .pixel-grid {
@@ -20,4 +42,11 @@
   border: 1px solid black;
   user-select: none;
   pointer-events: none;
+}
+.pixel-solid {
+  border-width: 2px;
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-left-color: rgba(255, 255, 255, 0.5);
+  border-right-color: rgba(0, 0, 0, 0.5);
+  border-bottom-color: rgba(0, 0, 0, 0.5);
 }
