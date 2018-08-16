@@ -1,0 +1,23 @@
+.columns.is-fullwidth {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.is-fullview {
+  width: 100%;
+  height: 80vh;
+}
+
+.pixel-grid {
+}
+.pixel-row {
+  display: table-row;
+}
+.pixel-cell {
+  display: table-cell;
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  user-select: none;
+  pointer-events: none;
+}

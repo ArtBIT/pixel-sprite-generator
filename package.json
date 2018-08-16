@@ -1,0 +1,65 @@
+{
+  "name": "pixel-sprite-generator",
+  "version": "1.0.0",
+  "description": "Generate pixel sprites",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node server.js  --ignore src",
+    "lint": "eslint .",
+    "deploy": "npm run build && gh-pages -d dist",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtBIT/pixel-sprite-generator.git"
+  },
+  "keywords": [
+    "pixel",
+    "sprite",
+    "generator",
+    "javascript"
+  ],
+  "author": "Djordje Ungar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ArtBIT/pixel-sprite-generator/issues"
+  },
+  "homepage": "https://github.com/ArtBIT/pixel-sprite-generator#readme",
+  "dependencies": {
+    "babel-preset-stage-2": "^6.24.1",
+    "bulma": "^0.7.1",
+    "canvas": "^1.6.11",
+    "random-js": "^1.0.8",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-es2015": "^1.3.0",
+    "css-loader": "^1.0.0",
+    "eslint": "^4.19.1",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-react": "^7.11.1",
+    "express": "^4.16.3",
+    "gh-pages": "^1.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "nodemon": "^1.18.3",
+    "prop-types": "^15.6.2",
+    "style-loader": "^0.22.1",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-livereload-plugin": "^2.1.1"
+  }
+}
