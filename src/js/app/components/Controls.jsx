@@ -246,7 +246,7 @@ class Controls extends React.Component {
                 type="number"
                 step="1"
                 min="1"
-                max="30"
+                max="50"
                 value={this.state.rows}
                 onChange={this.handleChange}
               />
