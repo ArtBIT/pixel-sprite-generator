@@ -232,7 +232,7 @@ class Controls extends React.Component {
                 type="number"
                 step="1"
                 min="1"
-                max="20"
+                max="30"
                 value={this.state.cols}
                 onChange={this.handleChange}
               />
@@ -246,7 +246,7 @@ class Controls extends React.Component {
                 type="number"
                 step="1"
                 min="1"
-                max="20"
+                max="30"
                 value={this.state.rows}
                 onChange={this.handleChange}
               />
