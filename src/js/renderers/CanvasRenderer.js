@@ -11,7 +11,6 @@ class CanvasRenderer {
     this.canvas.width = mask.width * this.pixelSize;
     this.canvas.height = mask.height * this.pixelSize;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    console.log(this.pallette);
     for (let y = 0; y < mask.height; y++) {
       for (let x = 0; x < mask.width; x++) {
         let value = mask.get(x, y);

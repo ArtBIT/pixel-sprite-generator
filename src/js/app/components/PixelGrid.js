@@ -1,4 +1,5 @@
 import React from 'react';
+import {isNegative} from '../../lib/math';
 
 const MOUSE_BUTTON_LEFT = 0;
 const MOUSE_BUTTON_MIDDLE = 1;
@@ -48,7 +49,7 @@ class PixelGrid extends React.Component {
                   return (
                     <div
                       className={
-                        'pixel-cell' + (value < 0 ? ' pixel-solid' : '')
+                        'pixel-cell' + (isNegative(value) ? ' pixel-solid' : '')
                       }
                       style={{
                         backgroundColor:

@@ -40,10 +40,12 @@ class Controls extends React.Component {
   };
 
   setTemplate = (template, updateStore) => {
-    const {pixelData, options} = Generator.templates[template];
-    const cols = pixelData.width;
-    const rows = pixelData.height;
-    const pixels = [...pixelData.data];
+    const {
+      width: cols,
+      height: rows,
+      data: pixels,
+      options,
+    } = Generator.templates[template];
     const {
       mirrorX,
       mirrorY,
@@ -212,7 +214,7 @@ class Controls extends React.Component {
             </Field.Control>
           </Field>
           <Field>
-            <Field.Label>Details:</Field.Label>
+            <Field.Label>Accent:</Field.Label>
             <Field.Control>
               <Input
                 name="detailsColor"
@@ -347,14 +349,14 @@ class Controls extends React.Component {
                       pixel)
                     </li>
                     <li>
-                      detail pixel (has a 50% chance of turning into foreground
+                      accent pixel (has a 50% chance of turning into foreground
                       pixel)
                     </li>
                   </ul>
                 </p>
                 <p className="content">
-                  Right-clicking the pixel will disable randomness and will make
-                  them persistent.
+                  Right-clicking a pixel will disable its randomness and will
+                  make it always be the state that you specified.
                 </p>
                 <p className="content">
                   Middle-clicking on the pixel grid and dragging will allow you
@@ -402,7 +404,9 @@ class Controls extends React.Component {
         detailsColor,
       } = this.state;
       saveTemplate(templateName, {
-        pixelData: {width: cols, height: rows, data: pixels},
+        width: cols,
+        height: rows,
+        data: pixels,
         options: {
           mirrorX,
           mirrorY,

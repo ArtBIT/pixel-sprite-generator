@@ -3,9 +3,8 @@ import EventEmitter from 'events';
 import Controls from './components/Controls';
 import Stage from './components/Stage';
 import Generator from '../generator/Generator';
-import PixelData from '../generator/PixelData';
 import CanvasGridRenderer from '../renderers/CanvasGridRenderer';
-const {setSeed} = require('../random');
+const {setSeed} = require('../lib/math');
 
 const identity = x => x;
 class App extends React.Component {
@@ -30,24 +29,20 @@ class App extends React.Component {
       return;
     }
     setSeed(state.seed);
-    const pixelData = new PixelData(state.cols, state.rows, state.pixels);
     const recipes = [
       {name: 'randomize'},
       state.outline && {
         name: 'outline',
-        options: {
-          outlineCharacter: 2,
-          whichCharacters: [1],
-          transparentCharacters: [0],
-        },
       },
       state.mirrorX && {name: 'mirrorx'},
       state.mirrorY && {name: 'mirrory'},
     ].filter(identity);
-    const generator = new Generator({
-      pixelData,
+
+    const generator = new Generator(
+      {width: state.cols, height: state.rows, data: state.pixels},
       recipes,
-    });
+    );
+
     const padding = state.padding;
     const pixelSize = state.zoom;
     const {

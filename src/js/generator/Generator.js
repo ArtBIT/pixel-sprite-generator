@@ -1,11 +1,15 @@
 const transformers = require('./transformers');
 const {templates} = require('./templates');
+const PixelData = require('./PixelData');
 
 class Generator {
-  constructor(template, seed) {
-    template = template || {};
-    this.pixelData = template.pixelData;
-    this.recipes = template.recipes || [];
+  constructor(template, recipes) {
+    this.pixelData = new PixelData(
+      template.width || 1,
+      template.height || 1,
+      template.data,
+    );
+    this.recipes = recipes || [];
   }
   run() {
     const pixelData = this.pixelData.clone();

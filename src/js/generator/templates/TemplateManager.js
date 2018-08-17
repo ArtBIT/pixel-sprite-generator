@@ -1,69 +1,55 @@
-const PixelData = require('../PixelData');
-const DEMO_TEMPLATES = require('./demo');
-
+import {isNegative} from '../../lib/math';
+import DEMO_TEMPLATES from './demo';
 const TEMPLATES_STORAGE_KEY = 'pixel-sprite-generator-templates';
+
 class TemplateManager {
   constructor() {
     this.templates = {};
     this.reset();
     this.deserialize(localStorage.getItem(TEMPLATES_STORAGE_KEY));
   }
+
   reset() {
-    // clear do not destroy
+    // clear the templates do not destroy so that we do not destroy the object reference
     for (let key in this.templates) delete this.templates[key];
     for (let key in DEMO_TEMPLATES) this.templates[key] = DEMO_TEMPLATES[key];
   }
+
   add(name, template) {
-    this.templates[name] = this.denormalizeTemplate(
-      this.normalizeTemplate(name, template),
-    );
+    this.templates[name] = template;
     localStorage.setItem(TEMPLATES_STORAGE_KEY, this.serialize());
   }
+
   remove(name) {
     delete this.templates[name];
     localStorage.setItem(TEMPLATES_STORAGE_KEY, this.serialize());
   }
+
   serialize() {
-    const t = this.templates;
-    return JSON.stringify(
-      Object.keys(t).map(templateName =>
-        this.normalizeTemplate(templateName, t[templateName]),
-      ),
-    );
+    return JSON.stringify(this.templates, (key, value) => {
+      if (value === 0 && isNegative(value)) {
+        return '-0';
+      }
+      return value;
+    });
   }
+
   deserialize(data) {
     if (data) {
       try {
-        JSON.parse(data).map(
-          item => (this.templates[item.name] = this.denormalizeTemplate(item)),
+        var storedTemplates = JSON.parse(data, (key, value) => {
+          if (value === '-0') {
+            return -0;
+          }
+          return value;
+        });
+        Object.keys(storedTemplates).map(
+          name => (this.templates[name] = storedTemplates[name]),
         );
       } catch (e) {
         console.error(e);
       }
     }
-  }
-  normalizeTemplate(name, template) {
-    const {options, pixelData} = template;
-    const {width, height, data} = pixelData;
-    return {
-      name,
-      width,
-      height,
-      data,
-      options,
-    };
-  }
-  denormalizeTemplate(template) {
-    try {
-      const {width, height, data, options} = template;
-      return {
-        pixelData: new PixelData(width, height, data),
-        options,
-      };
-    } catch (e) {
-      console.error(e);
-    }
-    return false;
   }
 }
 
