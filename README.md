@@ -3,6 +3,8 @@
 
 This is a tiny web app that generates pixel sprite sheets based on a template.
 
+| | | | |
+|:---:|:---:|:---:|:---:|
 | <img src="/assets/screenshot.png"> | <img src="/assets/helmets.png"> | <img src="/assets/turrets.png"> | <img src="/assets/alien-alphabet.png"> |
 
 # Demo
