@@ -2,10 +2,10 @@
 [![GitHub license](https://img.shields.io/github/license/ArtBIT/pixel-sprite-generator.svg)](https://github.com/ArtBIT/pixel-sprite-generator) [![GitHub stars](https://img.shields.io/github/stars/ArtBIT/pixel-sprite-generator.svg)](https://github.com/ArtBIT/pixel-sprite-generator)  [![awesomeness](https://img.shields.io/badge/awesomeness-maximum-red.svg)](https://github.com/ArtBIT/pixel-sprite-generator)
 
 This is a tiny web app that generates pixel sprite sheets based on a template.
-<img align="left" width="50%" src="/assets/screenshot.png">
-<img align="left" width="50%" src="/assets/helmets.png">
-<img align="left" width="50%" src="/assets/turrets.png">
-<img align="left" width="50%" src="/assets/alien-alphabet.png">
+| | |
+|:-------------------------:|:-------------------------:|
+| <img src="/assets/screenshot.png"> | <img src="/assets/helmets.png"> |
+| <img src="/assets/turrets.png"> | <img src="/assets/alien-alphabet.png"> |
 
 # Demo
 Try out the live demo http://artbit.github.io/pixel-sprite-generator/
