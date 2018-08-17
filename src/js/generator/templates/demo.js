@@ -16,9 +16,10 @@ const DEMO_TEMPLATES = {
             0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         ],
         options: {
-            outline: false,
+            outline: true,
             mirrorX: true,
-            mirrorY: false
+            mirrorY: false,
+            zoom: 5
         },
     },
     "robot": {
@@ -42,7 +43,8 @@ const DEMO_TEMPLATES = {
         options: {
             outline: false,
             mirrorX: true,
-            mirrorY: false
+            mirrorY: false,
+            zoom: 7
         },
     },
     "alien alphabet": {
@@ -51,16 +53,20 @@ const DEMO_TEMPLATES = {
         data: [
           0, 0, 0, 0, 0, 0,
           0,-1, 1, 1, 1, 0,
-          0, 0, 0, 0, 1, 0,
+          0, 1, 0, 2, 1, 0,
           0, 1, 1, 1,-1, 0,
-          0, 0, 0, 0, 0, 0,
+          0, 1, 2, 0, 2, 0,
           0,-1, 1, 1, 1, 0,
           0, 0, 0, 0, 0, 0,
         ],
         options: {
             outline: false,
             mirrorX: false,
-            mirrorY: false
+            mirrorY: false,
+            zoom: 6,
+            padding: 0,
+            foregroundColor: '#225511',
+            detailsColor: '#112211'
         },
     },
     "spaceship": {
