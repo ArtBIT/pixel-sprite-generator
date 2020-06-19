@@ -39,7 +39,7 @@ class PixelGrid extends React.Component {
         {Array(rows)
           .fill(0)
           .map((ynone, y) => (
-            <div className="pixel-row">
+            <div className="pixel-row" key={y}>
               {Array(cols)
                 .fill(0)
                 .map((xnone, x) => {
@@ -48,6 +48,7 @@ class PixelGrid extends React.Component {
                   const value = pixels[iy * cols + ix];
                   return (
                     <div
+                      key={x}
                       className={
                         'pixel-cell' + (isNegative(value) ? ' pixel-solid' : '')
                       }
@@ -100,7 +101,7 @@ class PixelGrid extends React.Component {
         for (let y = 0; y < rows; y++)
           for (let x = 0; x < cols; x++)
             pixels[
-              ((y + rows + iy) % rows) * cols + (x + cols + ix) % cols
+              ((y + rows + iy) % rows) * cols + ((x + cols + ix) % cols)
             ] = this.dragPixels[y * cols + x];
         this.onChange({pixels});
       } else if (this.mouseDown.button == MOUSE_BUTTON_LEFT) {

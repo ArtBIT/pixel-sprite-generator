@@ -48,6 +48,7 @@ class Dropdown extends React.Component {
           <div className="dropdown-content">
             {items.map(({name, value}) => (
               <a
+                key={value}
                 href="#"
                 className="dropdown-item"
                 data-value={value}

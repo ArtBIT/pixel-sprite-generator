@@ -315,6 +315,11 @@ class Controls extends React.Component {
               <Button onClick={this.saveTemplate}>Save</Button>
             </Field.Control>
           </Field>
+          <div className="buy-me-coffee-wrapper">
+            <a href="https://www.buymeacoffee.com/artbit" target="_blank">
+                <img src="https://cdn.buymeacoffee.com/buttons/default-white.png" alt="Buy Me A Coffee" style={{height: '32px'}} />
+            </a>
+          </div>
         </Panel>
         <div
           className={[

@@ -58,3 +58,7 @@
   border-right-color: rgba(0, 0, 0, 0.5);
   border-bottom-color: rgba(0, 0, 0, 0.5);
 }
+.buy-me-coffee-wrapper {
+  text-align: right;
+  padding-right: 20px;
+}

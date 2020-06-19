@@ -8,7 +8,7 @@ module.exports = {
     path: __dirname + '/demo',
     filename: 'bundle.js',
   },
-  mode: 'production',
+  mode: process.env.NODE_ENV || 'production',
   module: {
     rules: [
       {
